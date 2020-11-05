@@ -7,17 +7,28 @@
 #All class methods, when considered independently should run in constant time and with constant space.
 
 class MinMaxStack:
+    def __init__(self):
+        self.minMaxStack = []
+        self.stack = []
+
     def peek(self):
-        pass
+        return self.stack[len(self.stack) - 1]
 
     def pop(self):
-        pass
+        self.minMaxStack.pop()
+        return self.stack.pop()
 
     def push(self, number):
-        pass
+        newMinMax = {"min": number, "max": number}
+        if len(self.minMaxStack):
+            lastMinMax = self.minMaxStack[len(self.minMaxStack) - 1]
+            newMinMax["min"] = min(lastMinMax["min"], number)
+            newMinMax["max"] = max(lastMinMax["max"], number)
+        self.minMaxStack.append(newMinMax)
+        self.stack.append(number)
 
     def getMin(self):
-        pass
+        return self.minMaxStack[len(self.minMaxStack) - 1]["min"]
 
     def getMax(self):
-        pass
+        return self.minMaxStack[len(self.minMaxStack) - 1]["max"]
